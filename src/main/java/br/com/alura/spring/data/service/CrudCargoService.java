@@ -10,13 +10,37 @@ import java.util.Scanner;
 public class CrudCargoService {
 
     private final CargoRepository cargoRepository;
+    private boolean system = true;
 
     public CrudCargoService(CargoRepository cargoRepository) {
         this.cargoRepository = cargoRepository;
     }
 
     public void inicial(Scanner scanner){
-        salvar(scanner);
+
+        while(system){
+            System.out.println("O QUE VOCÊ QUER FAZER?");
+            System.out.println("0 - Sair");
+            System.out.println("1 - Salvar");
+            System.out.println("2 - Atualizar");
+            System.out.println("3 - Deletar");
+
+            int escolha = scanner.nextInt();
+
+            switch (escolha){
+                case 1:
+                    salvar(scanner);
+                    break;
+                case 2:
+                    atualizar(scanner);
+                    break;
+                case 3:
+                    excluir(scanner);
+                    break;
+                default:
+                    system = false;
+            }
+        }
     }
 
     public void salvar(Scanner scanner){
@@ -26,7 +50,27 @@ public class CrudCargoService {
         cargo.setDescricao(decricao);
         cargoRepository.save(cargo);
         System.out.println("Salvo!");
+    }
 
+    public void atualizar(Scanner scanner){
+        System.out.println("Informar Id:");
+        Integer id = scanner.nextInt();
+        System.out.println("DESCRICAO DO CARGO");
+        String descricao = scanner.next();
+        Cargo cargo = new Cargo();
+        cargo.setId(id);
+        cargo.setDescricao(descricao);
+        cargoRepository.save(cargo);
+        System.out.println("ATUALIZAÇÃO OK!");
+    }
+    
+    public void excluir(Scanner scanner){
+        System.out.println("INFORMAR O ID");
+        Integer id = scanner.nextInt();
+        Cargo cargo = new Cargo();
+        cargo.setId(id);
+        cargoRepository.delete(cargo);
+        System.out.println("DELETADO COM SUCESSO");
     }
 
 

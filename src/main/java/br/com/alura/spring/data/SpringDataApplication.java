@@ -11,35 +11,30 @@ import java.util.Scanner;
 @SpringBootApplication
 public class SpringDataApplication implements CommandLineRunner {
 
-	private final CrudCargoService service;
+    private final CrudCargoService service;
+    private Boolean system = true;
 
-	private Boolean system = true;
+    public SpringDataApplication(CrudCargoService service) {
+        this.service = service;
+    }
+    public static void main(String[] args) {
+        SpringApplication.run(SpringDataApplication.class, args);
+    }
+    @Override
+    public void run(String... args) throws Exception {
+        Scanner scanner = new Scanner(System.in);
 
-	public SpringDataApplication(CrudCargoService service) {
-		this.service = service;
-	}
+        while (system) {
+            System.out.println("Qual acao voce quer executar?");
+            System.out.println("0 - Sair");
+            System.out.println("1 - Cargo");
 
-
-	public static void main(String[] args) {
-		SpringApplication.run(SpringDataApplication.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		Scanner scanner = new Scanner(System.in);
-
-		while(system){
-			System.out.println("Qual acao voce quer executar?");
-			System.out.println("0 - Sair");
-			System.out.println("1 - Cargo");
-
-			int action = scanner.nextInt();
-			if(action == 1){
-				service.inicial(scanner);
-			}else{
-				system = false;
-			}
-		}
-
-	}
+            int action = scanner.nextInt();
+            if (action == 1) {
+                service.inicial(scanner);
+            } else {
+                system = false;
+            }
+        }
+    }
 }
