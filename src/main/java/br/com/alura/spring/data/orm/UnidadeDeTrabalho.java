@@ -4,15 +4,15 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "cargos")
-public class Cargo {
+@Table(name = "unidadeDeTrabalho")
+public class UnidadeDeTrabalho {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String descricao;
-
-    @OneToMany(mappedBy = "cargo")
+    private String endereco;
+    @ManyToMany(mappedBy = "unidadeTrabalhos", fetch=FetchType.EAGER)
     private List<Funcionario> funcionarioList;
 
     public Integer getId() {
@@ -31,11 +31,19 @@ public class Cargo {
         this.descricao = descricao;
     }
 
-    @Override
-    public String toString() {
-        return "Cargo{" +
-                "id=" + id +
-                ", descricao='" + descricao + '\'' +
-                '}';
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<Funcionario> getFuncionarioList() {
+        return funcionarioList;
+    }
+
+    public void setFuncionarioList(List<Funcionario> funcionarioList) {
+        this.funcionarioList = funcionarioList;
     }
 }
