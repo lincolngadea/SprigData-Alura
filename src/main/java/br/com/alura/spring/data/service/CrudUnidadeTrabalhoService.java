@@ -70,7 +70,7 @@ public class CrudUnidadeTrabalhoService {
         Integer id = scanner.nextInt();
 
         System.out.println("Digite o nome da unidade");
-        String nome = scanner.next();
+        String nome = scanner.nextLine();
 
         System.out.println("Digite o endereco");
         String endereco = scanner.next();
