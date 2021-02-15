@@ -91,6 +91,7 @@ public class RelatoriosService {
         funcionarioList.forEach(System.out::println);
     }
 
+    //RETORNA UMA LISTA PROJETADA A PARTIR DA CLASSE FuncionarioProjecao
     private void pesquisaFuncionarioSalario(){
         List<FuncionarioProjecao> funcionarioProjecaoList = funcionarioRepository.findFuncionarioSalario();
         funcionarioProjecaoList.forEach(f -> System.out.println("Funcionario: id: " + f.getId() + " | nome: "+ f.getNome() + " | Salario: "+ f.getSalario()));
